@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- Configuração do serviço -->
+    <bean id="userService" class="io.codeforall.fanstatics.UserService" />
+
+    <!-- Configuração do aspect -->
+    <bean id="loggingAspect" class="io.codeforall.fanstatics.LoggingAspect" />
+
+
+    <!-- Configuração AOP -->
+    <aop:config>
+        <!-- Interceptar todos os métodos do `UserService` -->
+        <aop:pointcut id="serviceMethods" expression="execution(* io.codeforall.fanstatics.UserService.*(..))" />
+
+        <!-- Configuração de Before e After -->
+        <aop:aspect ref="loggingAspect">
+            <aop:before method="logBefore" pointcut-ref="serviceMethods" />
+            <aop:after method="logAfter" pointcut-ref="serviceMethods" />
+        </aop:aspect>
+    </aop:config>
+</beans>

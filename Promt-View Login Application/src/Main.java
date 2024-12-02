@@ -10,11 +10,12 @@ public class Main {
 
         // Criando o Map com nome de utilizador e palavra-passe
         Map<String, String> users = new HashMap<>();
-        users.put("user1", "password123");
+        users.put("user1", "123");
         users.put("admin", "adminpass");
         users.put("guest", "guestpass");
 
         Prompt prompt = new Prompt(System.in, System.out);
+
 
 
         StringInputScanner question1 = new StringInputScanner();

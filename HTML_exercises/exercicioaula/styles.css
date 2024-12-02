@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.box {
+    display: inline-block;
+    margin: 30px auto;
+    padding: 20px; /* Área de padding (laranja ao redor do verde) */
+    background-color: rgb(240, 155, 80); /* Fundo laranja */
+}
+
+.content {
+    background-color: white; /* Área de conteúdo */
+    color: black;
+    padding: 10px; /* Espaço interno dentro do quadrado verde */
+    display: inline-block;
+    border: 30px solid green; /* Borda verde (padding verde) */
+    box-shadow: 0 0 0 5px black; /* Adiciona uma borda preta ao redor */
+}
+
+.legend {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.legend-item {
+    display: inline-block;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.padding {
+    background-color: green;
+}
+
+.margin {
+    background-color: rgb(240, 155, 80);
+}
+
+.border {
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+}
