@@ -1,0 +1,52 @@
+body {
+    background-color: black;
+    color: yellow;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px;
+    border: 2px solid yellow;
+    padding: 10px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70vh;
+}
+
+.player {
+    text-align: center;
+}
+
+.player img {
+    width: 150px;
+    height: 150px;
+    margin: 10px 0;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    background-color: yellow;
+    color: black;
+    border: 2px solid yellow;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: black;
+    color: yellow;
+}

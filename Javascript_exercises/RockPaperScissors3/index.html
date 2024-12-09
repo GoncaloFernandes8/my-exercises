@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCKXPAPERXSCISSORS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gameTitle">
+        <h1>ROCKXPAPERXSCISSORS</h1>
+    </div>
+
+    <div id="gameContainer">
+        <div id="playerSetup">
+            <div id="player1Setup" class="playerSetup">
+                <h2>Player 1 Selection</h2>
+                <div class="imageSelection"></div>
+                <div class="selectedImage">
+                    <img id="player1SelectedImg" src="" alt="Player 1 Selected">
+                </div>
+            </div>
+            <div id="player2Setup" class="playerSetup">
+                <h2>Player 2 Selection</h2>
+                <div class="imageSelection"></div>
+                <div class="selectedImage">
+                    <img id="player2SelectedImg" src="" alt="Player 2 Selected">
+                </div>
+            </div>
+        </div>
+
+        <div id="gameArea" style="display: none;">
+            <div class="container-app">
+                <div id="player1Area" class="playerArea">
+                    <img id="player1-avatar" src="" alt="Player 1 Avatar" class="avatar">
+                    <h2>Player 1</h2>
+                    <img id="player1-img" src="" alt="Player 1 choice">
+                    <div>Score: <span id="player1-score">0</span></div>
+                </div>
+                <div id="player2Area" class="playerArea">
+                    <img id="player2-avatar" src="" alt="Player 2 Avatar" class="avatar">
+                    <h2>Player 2</h2>
+                    <img id="player2-img" src="" alt="Player 2 choice">  
+                    <div>Score: <span id="player2-score">0</span></div>
+                </div>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button id="start-game" style="display: none;">Start Game</button>
+        <button id="play-button" style="display: none;">Play</button>
+        <button id="reset-button" style="display: none;">Reset</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Gonçalo Fernandes</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      font-weight: bold;
+      color: #f39c12;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #f39c12;
+      transform: scale(1.1);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin: 0;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      max-width: 700px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      color: #fff;
+      background: #f39c12;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background: #e67e22;
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #f39c12;
+    }
+
+    /* Skills Section */
+    .skills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .skills .skill {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 40px;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      transition: transform 0.3s, background-color 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .skills .skill:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-10px);
+    }
+
+    /* Contact Section */
+    .contact-info a {
+      color: #f39c12;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #e67e22;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .skills .skill {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gonçalo Fernandes</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero" id="about">
+    <h1>✨ Fullstack Developer</h1>
+    <p>💻 Passionate about technology and solving challenges. 🎓 Professional Qualification in IT Management & Programming. 🚀 Currently pursuing a Bootcamp at Code For All. Dedicated to achieving success in programming!</p>
+    <button onclick="scrollToSection('skills')">See My Skills</button>
+  </div>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>🛠️ My Toolbox</h2>
+    <div class="skills">
+      <div class="skill">Python</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">MySQL</div>
+      <div class="skill">HTML5</div>
+      <div class="skill">CSS3</div>
+      <div class="skill">Bootstrap</div>
+      <div class="skill">Spring</div>
+      <div class="skill">IntelliJ</div>
+      <div class="skill">Git</div>
+      <div class="skill">Tomcat</div>
+      <div class="skill">jQuery</div>
+    </div>
+  </section>
+
+  <!-- Fun Facts Section -->
+  <section>
+    <h2>⚽ Fun Facts</h2>
+    <p>⚡ Avid soccer and martial arts enthusiast. 🎮 Rocket League pro player and casual gamer. ✨ Believer in: "The right code can change the world!"</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>🌟 How to Reach Me</h2>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:goncalo8fernandes8@gmail.com">goncalo8fernandes8@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/goncalo-fernandes/" target="_blank">Gonçalo Fernandes</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 Gonçalo Fernandes. Built with ❤️ and a lot of code.</p>
+  </footer>
+
+  <script>
+    // Smooth scroll to the sections
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Add scroll effects for navigation
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      } else {
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+      }
+    });
+  </script>
+</body>
+</html>
