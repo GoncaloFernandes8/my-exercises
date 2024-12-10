@@ -1,17 +1,17 @@
 // Constants
 const CHOICES = ["rock", "paper", "scissors"];
 const NOT_SELECTED_IMAGE = "src/notSelected.png";
-
+const TIE_IMAGE = "src/espada.png";
 const GAME_IMAGES = {
     rock: "src/rock.png",
     paper: "src/paper.png",
     scissors: "src/scissors.png"
 };
 const AVATAR_IMAGES = {
-    "0": "src/0.png",
-    "1": "src/1.png",
-    "5": "src/5.png",
-    "7": "src/7.png"
+    "0": { src: "src/0.png", name: "Gustavo" },
+    "1": { src: "src/1.png", name: "Mekie" },
+    "5": { src: "src/5.png", name: "Jorge" },
+    "7": { src: "src/7.png", name: "Mafalda" }
 };
 const WINNING_COMBINATIONS = {
     rock: ["scissors"],
@@ -42,19 +42,7 @@ let player2Selection = '';
 let player1Avatar = '';
 let player2Avatar = '';
 
-// Initialize game
-function initializeGame() {
-    hidePlayerImages();
-    resetScores();
-    setupAvatarSelection();
-    startGameButton.addEventListener('click', startGame);
-    playButton.addEventListener("click", playRound);
-    resetButton.addEventListener("click", resetGame);
-    
-    // Inicialize as imagens selecionadas com a imagem "notSelected"
-    player1SelectedImg.src = NOT_SELECTED_IMAGE;
-    player2SelectedImg.src = NOT_SELECTED_IMAGE;
-}
+
 // Hide player images
 function hidePlayerImages() {
     player1Img.style.display = 'none';
@@ -79,19 +67,20 @@ function setupAvatarSelection() {
     const player1ImageSelection = document.querySelector('#player1Setup .imageSelection');
     const player2ImageSelection = document.querySelector('#player2Setup .imageSelection');
 
-    Object.keys(AVATAR_IMAGES).forEach(avatar => {
-        const img1 = createAvatarImage(avatar, 'player1');
-        const img2 = createAvatarImage(avatar, 'player2');
+    Object.entries(AVATAR_IMAGES).forEach(([key, value]) => {
+        const img1 = createAvatarImage(key, 'player1');
+        const img2 = createAvatarImage(key, 'player2');
+        img1.title = value.name;
+        img2.title = value.name;
         player1ImageSelection.appendChild(img1);
         player2ImageSelection.appendChild(img2);
     });
 }
 
-// Create avatar image
 function createAvatarImage(avatar, player) {
     const img = document.createElement('img');
-    img.src = AVATAR_IMAGES[avatar];
-    img.alt = avatar;
+    img.src = AVATAR_IMAGES[avatar].src;  // Corrigido para acessar a propriedade 'src'
+    img.alt = AVATAR_IMAGES[avatar].name;
     img.dataset.avatar = avatar;
     img.addEventListener('click', selectPlayerAvatar);
     return img;
@@ -110,47 +99,78 @@ function selectPlayerAvatar(event) {
     selectedImg.src = clickedImage.src;
     selectedImg.alt = clickedImage.alt;
 
+    const avatarKey = clickedImage.dataset.avatar;
+    const avatarName = AVATAR_IMAGES[avatarKey].name;
+
     if (playerSelection.id === 'player1Setup') {
-        player1Avatar = clickedImage.dataset.avatar;
+        player1Avatar = avatarKey;
+        document.querySelector('#player1Area h2').textContent = avatarName;
     } else {
-        player2Avatar = clickedImage.dataset.avatar;
+        player2Avatar = avatarKey;
+        document.querySelector('#player2Area h2').textContent = avatarName;
     }
 
     checkIfBothPlayersSelectedAvatar();
+    updatePlayerAvatars(); // Adicione esta linha
 }
 
 // Check if both players have selected their avatars
 function checkIfBothPlayersSelectedAvatar() {
     if (player1Avatar && player2Avatar) {
+        startGameButton.disabled = false;
         startGameButton.style.display = 'inline-block';
-        startGameButton.disabled = false;  // Habilita o botão
+        console.log("Both players selected avatars, Start Game button enabled");
     } else {
+        startGameButton.disabled = true;
         startGameButton.style.display = 'none';
-        startGameButton.disabled = true;  // Desabilita o botão
+        console.log("Not all players selected avatars, Start Game button disabled");
     }
+}
+
+function handleAvatarSelection(event, player) {
+    const selectedAvatar = event.target.getAttribute('data-avatar');
+    if (player === 'player1') {
+        player1Avatar = selectedAvatar;
+        updateAvatarImage('player1', selectedAvatar);
+    } else {
+        player2Avatar = selectedAvatar;
+        updateAvatarImage('player2', selectedAvatar);
+    }
+    checkIfBothPlayersSelectedAvatar();
+}
+
+function updateAvatarImage(player, avatar) {
+    const setupArea = document.querySelector(`#${player}Setup`);
+    const gameArea = document.querySelector(`#${player}Area`);
+    
+    // Atualiza a imagem na área de configuração
+    setupArea.querySelector('.selectedImage img').src = AVATAR_IMAGES[avatar].src;
+    
+    // Atualiza a imagem e o nome na área do jogo
+    gameArea.querySelector('.avatar').src = AVATAR_IMAGES[avatar].src;
+    gameArea.querySelector('h2').textContent = AVATAR_IMAGES[avatar].name;
 }
 
 // Start the game
 // Start the game
 function startGame() {
+    console.log("Start Game function called");
     playerSetup.style.display = 'none';
     gameArea.style.display = 'block';
+    startGameButton.style.display = 'none';
+    playButton.style.display = 'inline-block';
+    resetButton.style.display = 'inline-block';
     updatePlayerAvatars();
     resultText.textContent = 'Choose your weapon!';
     updateScoreDisplay();
-    playButton.style.display = 'inline-block';
-    resetButton.style.display = 'inline-block';
-    startGameButton.style.display = 'none';  // Oculta o botão Start Game
 }
 
-// Update player avatars
-// Update player avatars
 function updatePlayerAvatars() {
-    const player1AvatarImg = document.getElementById('player1-avatar');
-    const player2AvatarImg = document.getElementById('player2-avatar');
-    player1AvatarImg.src = AVATAR_IMAGES[player1Avatar];
-    player2AvatarImg.src = AVATAR_IMAGES[player2Avatar];
+    updateAvatarImage('player1', player1Avatar);
+    updateAvatarImage('player2', player2Avatar);
 }
+
+
 
 // Play a round
 function playRound() {
@@ -166,7 +186,6 @@ function playRound() {
     updateScore(result);
     displayResult(result);
 }
-
 // Determine the winner
 function determineWinner(player1Choice, player2Choice) {
     if (player1Choice === player2Choice) return 'tie';
@@ -183,39 +202,80 @@ function updateScore(result) {
 
 // Display result
 function displayResult(result) {
+    const resultDisplay = document.createElement('div');
+    resultDisplay.className = 'result-display';
+
+    const resultImg = document.createElement('img');
+    resultImg.className = 'winner-avatar';
+    
+    const resultText = document.createElement('p');
+
     if (result === 'tie') {
+        resultImg.src = TIE_IMAGE;
+        resultImg.alt = "It's a tie!";
         resultText.textContent = "It's a tie!";
-    } else if (result === 'player1') {
-        resultText.textContent = "Player 1 wins!";
     } else {
-        resultText.textContent = "Player 2 wins!";
+        const winnerAvatar = result === 'player1' ? player1Avatar : player2Avatar;
+        resultImg.src = AVATAR_IMAGES[winnerAvatar].src;
+        resultImg.alt = `${AVATAR_IMAGES[winnerAvatar].name} wins`;
+        resultText.textContent = `${AVATAR_IMAGES[winnerAvatar].name} WINS!`;
     }
+
+    resultDisplay.appendChild(resultImg);
+    resultDisplay.appendChild(resultText);
+
+    // Atualizar as imagens selecionadas e exibi-las
+    player1SelectedImg.src = GAME_IMAGES[player1Selection];
+    player2SelectedImg.src = GAME_IMAGES[player2Selection];
+    player1SelectedImg.style.display = 'block';
+    player2SelectedImg.style.display = 'block';
+
+    // Atualizar as imagens na área do jogo
+    player1Img.src = GAME_IMAGES[player1Selection];
+    player2Img.src = GAME_IMAGES[player2Selection];
+    player1Img.style.display = 'block';
+    player2Img.style.display = 'block';
+
+    // Limpar o conteúdo anterior e adicionar o novo resultado
+    resultText.innerHTML = '';
+    resultText.appendChild(resultDisplay);
+}
+function initializeGame() {
+    resetGame();
+    setupAvatarSelection();
+    
+    startGameButton.addEventListener('click', startGame);
+    playButton.addEventListener("click", playRound);
+    resetButton.addEventListener("click", resetGame);
 }
 
-// Reset game
-// Reset game
 function resetGame() {
     player1Selection = '';
     player2Selection = '';
     player1Avatar = '';
     player2Avatar = '';
-    resetScores();
+    player1Score = 0;
+    player2Score = 0;
+    
     hidePlayerImages();
-    resultText.textContent = 'Choose your weapon!';
+    resetScores();
+    
     playerSetup.style.display = 'block';
     gameArea.style.display = 'none';
     startGameButton.style.display = 'none';
-    startGameButton.disabled = true;
     playButton.style.display = 'none';
     resetButton.style.display = 'none';
-    document.querySelectorAll('.imageSelection img').forEach(img => img.classList.remove('selected'));
     
-    // Use a imagem "notSelected" para as imagens selecionadas
+    resultText.textContent = '';
+    
+    // Reset avatar selections
+    document.querySelectorAll('.imageSelection img').forEach(img => img.classList.remove('selected'));
     player1SelectedImg.src = NOT_SELECTED_IMAGE;
     player2SelectedImg.src = NOT_SELECTED_IMAGE;
-    player1SelectedImg.alt = 'Not Selected';
-    player2SelectedImg.alt = 'Not Selected';
+    
+    updateScoreDisplay();
 }
-
 // Initialize the game when the script loads
 initializeGame();
+
+document.addEventListener('DOMContentLoaded', initializeGame);

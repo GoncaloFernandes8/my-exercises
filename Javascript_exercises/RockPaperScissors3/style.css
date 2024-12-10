@@ -17,6 +17,15 @@ body {
     perspective: 1000px;
 }
 
+#start-game {
+    display: inline-block !important;
+}
+
+/* Botoões de jogo */
+#gameArea, #start-game, #play-button, #reset-button {
+    display: none;
+}
+
 /* Título do jogo */
 #gameTitle {
     display: flex;
@@ -54,10 +63,9 @@ body {
 
 /* Configuração dos jogadores */
 #playerSetup {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    display: block;
 }
+
 
 .playerSelection {
     text-align: center;
@@ -178,6 +186,32 @@ button:hover::before {
     color: #FFD700;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
     margin: 20px 0;
+}
+
+.result-display {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.winner-avatar {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #FFD700;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.result-display p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+#player1-img, #player2-img {
+    display: block;
+    margin: 10px auto;
+    width: 80px;
+    height: 80px;
 }
 
 /* Footer */

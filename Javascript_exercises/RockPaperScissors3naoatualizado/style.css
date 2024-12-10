@@ -1,0 +1,212 @@
+/* Estilo geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: linear-gradient(45deg, #000000, #1a1a1a);
+    color: #FFD700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+/* Título do jogo */
+#gameTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #FFD700;
+    margin-bottom: 30px;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: skew(-5deg);
+    transition: all 0.3s ease;
+}
+
+#gameTitle h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+}
+
+#gameTitle:hover {
+    transform: skew(-5deg) scale(1.05);
+}
+
+/* Layout do jogo */
+.container-app {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    transform-style: preserve-3d;
+    transform: rotateX(5deg);
+}
+
+/* Configuração dos jogadores */
+#playerSetup {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.playerSelection {
+    text-align: center;
+}
+
+.imageSelection {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.imageSelection img {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.imageSelection img:hover {
+    transform: scale(1.1);
+}
+
+.imageSelection img.selected {
+    border-color: #FFD700;
+    box-shadow: 0 0 10px #FFD700;
+}
+
+.selectedImage img {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #FFD700;
+    border-radius: 10px;
+}
+
+/* Estilos dos jogadores */
+.player1,
+.player2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #FFD700;
+    border-radius: 15px;
+    padding: 20px;
+    width: 45%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.player1:hover,
+.player2:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+}
+
+/* Estilos das imagens */
+img {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #FFD700;
+    border-radius: 15px;
+    margin: 15px 0;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+img:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Estilos dos botões */
+button {
+    background-color: transparent;
+    border: 3px solid #FFD700;
+    color: #FFD700;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #FFD700;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+.button-container {
+    margin-top: 10px;
+}
+
+/* Resultado */
+#result {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    margin: 20px 0;
+}
+
+/* Footer */
+#footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-app {
+        flex-direction: column;
+        transform: none;
+    }
+
+    .player1,
+    .player2 {
+        width: 100%;
+    }
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
